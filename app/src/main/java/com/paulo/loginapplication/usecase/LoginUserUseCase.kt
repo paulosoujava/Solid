@@ -4,12 +4,12 @@ import timber.log.Timber
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
-class LoginUserUseCase @Inject constructor(
+ open class LoginUserUseCase @Inject constructor(
     private val getUserByEmailUseCase: GetUserByEmailUseCase,
     private val addLoggedInEmailToDatastoreUseCase: AddLoggedInEmailToDatastoreUseCase
 ) {
 
-    suspend operator fun invoke(email: String, password: String): Result {
+    open suspend operator fun invoke(email: String, password: String): Result {
         Timber.d("invoke: $email")
         try {
             val userDto = getUserByEmailUseCase(email)

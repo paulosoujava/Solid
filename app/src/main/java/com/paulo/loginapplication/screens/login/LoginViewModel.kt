@@ -3,6 +3,7 @@ package com.paulo.loginapplication.screens.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulo.loginapplication.usecase.GetForgottenPasswordUseCase
+import com.paulo.loginapplication.usecase.Result
 
 import com.paulo.loginapplication.usecase.LoginUserUseCase
 import com.paulo.loginapplication.usecase.RegisterUserUseCase
@@ -89,11 +90,9 @@ class LoginViewModel @Inject constructor(
 
     fun forgotPasswordSubmitClicked(email: String) {
         viewModelScope.launch {
-            try {
-                val password = getForgottenPasswordUseCase(email)
-                _forgotPasswordGetSuccess.emit(password)
-            } catch (e: Exception) {
-                _error.emit(LoginErrorType.FORGOT_PASSWORD)
+            when (val result = getForgottenPasswordUseCase(email)) {
+                is Result.Success -> _forgotPasswordGetSuccess.emit(result.password)
+                is Result.Failure -> _error.emit(LoginErrorType.FORGOT_PASSWORD)
             }
         }
     }
