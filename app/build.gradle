@@ -1,0 +1,81 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+
+}
+
+android {
+    compileSdk = ProjectConfig.compileSdk
+
+    defaultConfig {
+        applicationId = ProjectConfig.appId
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
+        versionCode = ProjectConfig.versionCode
+        versionName = ProjectConfig.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+
+
+    //default
+    implementation(Google.ktx)
+    implementation(Google.appcompat)
+    implementation(Google.material)
+
+    //test
+    testImplementation(Google.junit)
+    androidTestImplementation(Google.junitExt)
+    androidTestImplementation(Google.espresso)
+    testImplementation(Google.coreTest)
+    testImplementation(Google.coroutineTest)
+    testImplementation(Google.mockito)
+    testImplementation(Google.turbine)
+
+    //hilt
+    kapt(Hilt.androidCompiler)
+    implementation(Hilt.hiltAndroid)
+
+
+    //room
+    implementation(Room.roomRuntimeImpl)
+    implementation(Room.roomKtx)
+    kapt(Room.roomCompiler)
+
+    //data storage
+    implementation(DataStore.preferences)
+    implementation(DataStore.core)
+
+    //lifecycle
+    implementation(LifeCycle.runtime)
+    implementation(LifeCycle.viewmodel)
+
+    //navigation
+    implementation(Navigation.ktx)
+    implementation(Navigation.ui)
+
+    //timber
+    implementation((Timber.timber))
+}

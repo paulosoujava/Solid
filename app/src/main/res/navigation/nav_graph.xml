@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loggedInFragment">
+
+    <action
+        android:id="@+id/logOut"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@anim/slide_out_top"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.paulo.loginapplication.screens.login.LoginFragment">
+
+        <action
+            android:id="@+id/toLoggedIn"
+            app:destination="@id/loggedInFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loggedInFragment"
+        android:name="com.paulo.loginapplication.screens.loggedIn.LoggedInFragment" />
+
+</navigation>
